@@ -19,6 +19,6 @@ def redirect2():
     return redirect(url_for("index"))
 @app.route("/redirect03")
 def redirect3():
-    return redirect(url_for("index2",user="3333"))
+    return redirect(url_for("index2",user="3333")),666
 if __name__ == '__main__':
     app.run()
