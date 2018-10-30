@@ -11,7 +11,7 @@ def before_request():
     print("before request")
 @app.after_request
 def after_request(response):
-    print("after_request")
+    print("after_request111")
     return response
 @app.teardown_request
 def teardown_request(e):
