@@ -5,6 +5,26 @@
     <title>$Title$</title>
 </head>
 <body>
-$END$ fja
+<br>{{ aa }}
+<br>{{ bb }}
+<br>{{ cc }}
+<br>{{ dd }}<br>
+{{ "hello world" | reverse }}
+<br>{{ "hello world" | reverse | upper }}
+<br>{{ "<h3>这是标题</h3>" | safe }}
+<br>{{ "heLlo worlD" | capitalize }}
+<br>{{"HELLO" | lower}}
+<br>{{"hello"| upper}}
+<br>{{"hello"|reverse}}
+<br>{{"%s  fhd %d"|format("shuzk",123)}}
+<br>{{"<h1>hahah</h1>"|striptags}}
+<br>{{ "hello a b , c d" | truncate(7) }}
+
+<h3>列表操作</h3>
+<p>{{ [1,2,3,4,5,6] | first }}</p>
+<p>{{ [1,2,3,4,5,6] | last }}</p>
+<p>{{ [1,2,3,4,5,6] | length }}</p>
+<p>{{ [1,2,3,4,5,6] | sum }}</p>
+<p>{{ [6,2,3,1,5,4] | sort }}</p>
 </body>
 </html>
