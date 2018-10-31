@@ -2,6 +2,21 @@ from flask import Flask
 from flask import render_template
 
 app=Flask(__name__)
+
+def do_listreverse(li):
+    temp_li=list(li)
+    temp_li.reverse()
+    return temp_li
+app.add_template_filter(do_listreverse,"lireverse")
+
+@app.template_filter("aa")
+def do_listreverse(li):
+    temp_li=list(li)
+    temp_li.reverse()
+    t=str(temp_li)
+    print(t)
+    return t
+
 @app.route("/")
 def index():
     a=1
