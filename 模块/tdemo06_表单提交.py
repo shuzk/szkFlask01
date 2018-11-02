@@ -1,5 +1,6 @@
 from flask import Flask,render_template, flash
 #导入wtf扩展的表单类
+from flask import request
 from flask_wtf import FlaskForm
 #导入自定义表单需要的字段
 from wtforms import SubmitField,StringField,PasswordField
@@ -34,7 +35,7 @@ def demo2():
         if request.method == "POST":
             flash("参数有误或者不完整")
 
-    return render_template('temp_register.html', form=register_form)
+    return render_template('temp_demo06_表单提交.html', form=register_form)
 
 if __name__ == '__main__':
     app.run(debug=True)
