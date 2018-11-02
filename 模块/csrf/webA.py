@@ -45,9 +45,22 @@ def transfer():
     if not username:
         return redirect(url_for('index'))
 
+    # if request.method == "POST":
+    #     to_account = request.form.get("to_account")
+    #     money = request.form.get("money")
+    #     print('假装执行转操作，将当前登录用户的钱转账到指定账户')
+    #     return '转账 %s 元到 %s 成功' % (money, to_account)
+
     if request.method == "POST":
         to_account = request.form.get("to_account")
         money = request.form.get("money")
+        # 取出表单中的 csrf_token
+        form_csrf_token = request.form.get("csrf_token")
+        # 取出 cookie 中的 csrf_token
+        cookie_csrf_token = request.cookies.get("csrf_token")
+        # 进行对比
+        if cookie_csrf_token != form_csrf_token:
+            return 'token校验失败，可能是非法操作'
         print('假装执行转操作，将当前登录用户的钱转账到指定账户')
         return '转账 %s 元到 %s 成功' % (money, to_account)
 
@@ -62,7 +75,8 @@ def transfer():
     # # 渲染转换页面
     # response = make_response(render_template('temp_transfer.html'))
     # return response
-
+# @app.before_request
+# def before_
 
 if __name__ == '__main__':
     app.run(debug=True, port=9000)
