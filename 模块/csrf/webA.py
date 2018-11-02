@@ -1,9 +1,18 @@
+import os
+
+import base64
+
 from flask import Flask, render_template, make_response
 from flask import redirect
 from flask import request
 from flask import url_for
 
 app = Flask(__name__)
+
+
+# 生成 csrf_token 函数
+def generate_csrf():
+    return bytes.decode(base64.b64encode(os.urandom(48)))
 
 
 @app.route('/', methods=["POST", "GET"])
@@ -42,9 +51,17 @@ def transfer():
         print('假装执行转操作，将当前登录用户的钱转账到指定账户')
         return '转账 %s 元到 %s 成功' % (money, to_account)
 
-    # 渲染转换页面
-    response = make_response(render_template('temp_transfer.html'))
+    # 生成 csrf_token 的值
+    csrf_token = generate_csrf()
+
+    # 渲染转换页面，传入 csrf_token 到模板中
+    response = make_response(render_template('temp_transfer.html', csrf_token=csrf_token))
+    # 设置csrf_token到cookie中，用于提交校验
+    response.set_cookie('csrf_token', csrf_token)
     return response
+    # # 渲染转换页面
+    # response = make_response(render_template('temp_transfer.html'))
+    # return response
 
 
 if __name__ == '__main__':
